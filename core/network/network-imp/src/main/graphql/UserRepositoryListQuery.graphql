@@ -1,0 +1,26 @@
+#
+# See https://developer.github.com/v4/object/user/
+#
+query UserRepositoryListQuery($userLogin: String!) {
+  user(login: $userLogin) @nonnull {
+    repositories() {
+      totalCount
+      edges {
+        cursor
+        node @nonnull {
+          ...repositoryFields
+        }
+      }
+    }
+  }
+}
+
+fragment repositoryFields on Repository {
+  id
+  name
+  description
+  url
+  stargazers(first: 0) {
+    totalCount
+  }
+}
