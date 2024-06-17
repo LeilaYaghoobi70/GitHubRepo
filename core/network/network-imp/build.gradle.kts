@@ -3,7 +3,7 @@ plugins {
     id("org.jetbrains.kotlin.android")
     id("com.apollographql.apollo3").version("3.8.4")
     id("kotlin-kapt")
-    id("com.google.dagger.hilt.android") version "2.44" apply false
+    id("com.google.dagger.hilt.android") version "2.50" apply false
 }
 
 android {
@@ -15,6 +15,8 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        buildConfigField(type = "String", name = "GITHUB_TOKEN", value = project.properties["GITHUB_TOKEN"].toString())
+        buildConfigField(type = "String", name = "BASE_URL", value = "\"https://api.github.com/graphql\"")
     }
 
     buildTypes {
@@ -34,8 +36,8 @@ android {
         jvmTarget =  JavaVersion.VERSION_17.toString()
     }
     apollo {
-        service("service") {
-            packageName.set("com.example")
+        service("github") {
+            packageName.set("app.google")
         }
     }
 }
@@ -59,8 +61,8 @@ dependencies {
     implementation("com.apollographql.apollo3:apollo-runtime:3.8.4")
 
     //hilt
-    implementation("com.google.dagger:hilt-android:2.44")
-    kapt("com.google.dagger:hilt-android-compiler:2.44")
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
 
 
 }

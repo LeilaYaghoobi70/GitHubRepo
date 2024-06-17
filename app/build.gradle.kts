@@ -1,6 +1,8 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -25,7 +27,7 @@ android {
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
-                "proguard-rules.pro"
+                "proguard-rules.pro",
             )
         }
     }
@@ -48,8 +50,22 @@ android {
         }
     }
 }
+kapt {
+    correctErrorTypes = true
+}
 
 dependencies {
+    implementation(project(":feature:repositories-imp:domain"))
+    implementation(project(":feature:repositories-imp:domain"))
+    implementation(project(":feature:repositories-imp:domain"))
+    implementation(project(":feature:repositories-imp:data"))
+    implementation(project(":feature:repositories-imp:presenter"))
+    implementation(project(":feature:repositories-api"))
+
+    implementation(project(":core:database:database-imp"))
+    implementation(project(":core:network:network-imp"))
+    implementation(project(":core:network:network-api"))
+    implementation(project(":core:database:database-api"))
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.8.0")
@@ -59,6 +75,7 @@ dependencies {
     implementation("androidx.compose.ui:ui-graphics")
     implementation("androidx.compose.ui:ui-tooling-preview")
     implementation("androidx.compose.material3:material3")
+
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -66,4 +83,11 @@ dependencies {
     androidTestImplementation("androidx.compose.ui:ui-test-junit4")
     debugImplementation("androidx.compose.ui:ui-tooling")
     debugImplementation("androidx.compose.ui:ui-test-manifest")
+
+    //hilt
+    implementation("com.google.dagger:hilt-android:2.50")
+    kapt("com.google.dagger:hilt-android-compiler:2.50")
+    implementation("com.google.dagger:hilt-core:2.50")
+    implementation("androidx.hilt:hilt-navigation-compose:1.2.0")
+
 }

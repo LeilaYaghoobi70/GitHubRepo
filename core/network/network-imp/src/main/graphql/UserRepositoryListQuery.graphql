@@ -1,9 +1,9 @@
 #
 # See https://developer.github.com/v4/object/user/
 #
-query UserRepositoryListQuery($userLogin: String!) {
-  user(login: $userLogin) @nonnull {
-    repositories() {
+query UserRepositoryListQuery($first: Int!) {
+  viewer @nonnull {
+    repositories(first: $first){
       totalCount
       edges {
         cursor

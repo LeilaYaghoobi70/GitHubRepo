@@ -12,7 +12,7 @@ java {
 dependencies{
 
     //hilt
-    implementation ("com.google.dagger:hilt-core:2.44")
-    kapt ("com.google.dagger:hilt-compiler:2.44")
+    implementation ("com.google.dagger:hilt-core:2.50")
+    kapt("com.google.dagger:hilt-compiler:2.50")
 
 }

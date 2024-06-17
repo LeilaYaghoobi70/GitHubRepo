@@ -8,7 +8,12 @@ import com.apollographql.apollo3.interceptor.ApolloInterceptorChain
 import kotlinx.coroutines.flow.Flow
 
 class AuthorizationInterceptor(val token: String) : ApolloInterceptor {
-    override fun <D : Operation.Data> intercept(request: ApolloRequest<D>, chain: ApolloInterceptorChain): Flow<ApolloResponse<D>> {
-        return chain.proceed(request.newBuilder().addHttpHeader("Authorization", "Bearer $token").build())
+    override fun <D : Operation.Data> intercept(
+        request: ApolloRequest<D>,
+        chain: ApolloInterceptorChain,
+    ): Flow<ApolloResponse<D>> {
+        return chain.proceed(
+            request.newBuilder().addHttpHeader("Authorization", "Bearer $token").build(),
+        )
     }
 }
