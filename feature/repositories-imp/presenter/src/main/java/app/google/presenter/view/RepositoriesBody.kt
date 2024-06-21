@@ -1,5 +1,6 @@
 package app.google.presenter.view
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -17,8 +18,10 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import app.google.domain.model.RepositoryModel
+import app.google.domain.model.ViewerInfoModel
 import app.google.presenter.contract.RepositoriesState
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun RepositoriesBody(
     repositoriesState: RepositoriesState,
@@ -35,6 +38,12 @@ fun RepositoriesBody(
         LazyColumn(
             userScrollEnabled = true,
         ) {
+            stickyHeader {
+                ViewerInfo(
+                    modifier = itemModifier,
+                    viewerInfoModel = repositoriesState.viewerInfoModel,
+                )
+            }
             items(repositories.size) {
                 RepositoryItem(
                     repositoryModel = repositories[it],
@@ -47,7 +56,36 @@ fun RepositoriesBody(
 }
 
 @Composable
-fun RepositoryItem(
+private fun ViewerInfo(
+    modifier: Modifier,
+    viewerInfoModel: ViewerInfoModel?,
+) {
+    Column(
+        modifier = modifier,
+        verticalArrangement = Arrangement.Center,
+    ) {
+        Text(
+            text = viewerInfoModel?.name ?: "",
+            fontWeight = FontWeight.Bold,
+            fontSize = MaterialTheme.typography.titleSmall.fontSize,
+        )
+
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(
+            text = viewerInfoModel?.email ?: "",
+            fontSize = MaterialTheme.typography.bodySmall.fontSize,
+        )
+        Spacer(modifier = Modifier.height(2.dp))
+        Text(
+            text = viewerInfoModel?.login ?: "",
+            fontSize = MaterialTheme.typography.bodySmall.fontSize,
+        )
+        Spacer(modifier = Modifier.height(1.dp))
+    }
+}
+
+@Composable
+private fun RepositoryItem(
     repositoryModel: RepositoryModel,
     modifier: Modifier,
     navigateToDetail: (RepositoryModel) -> (Unit),

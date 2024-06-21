@@ -39,6 +39,7 @@ dependencies {
     //project
     implementation(project(":core:network:network-api"))
     implementation(project(":feature:repositories-imp:domain"))
+    implementation(project(":feature:repositories-api"))
 
     implementation("androidx.core:core-ktx:1.13.1")
     implementation("androidx.appcompat:appcompat:1.6.1")

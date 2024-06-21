@@ -2,21 +2,9 @@
 # See https://developer.github.com/v4/object/user/
 #
 query ViewerInfoQuery {
-    viewer {
-        login
-        name
-        email
-
-        repositories(first: 10) {
-            nodes @nonnull {
-                id
-                name
-                description
-                stargazers(first: 0) {
-                    totalCount
-                }
-            }
-            totalCount
-        }
+    viewer @nonnull{
+        login  @nonnull
+        name @nonnull
+        email @nonnull
     }
 }
