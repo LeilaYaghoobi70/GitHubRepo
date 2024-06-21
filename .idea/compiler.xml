@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="CompilerConfiguration">
-    <bytecodeTargetLevel target="1.7">
+    <bytecodeTargetLevel target="17">
       <module name="GithubRepo.core.database-imp" target="17" />
       <module name="GithubRepo.core.network-imp" target="17" />
       <module name="GithubRepo.feature.repositories.data" target="17" />

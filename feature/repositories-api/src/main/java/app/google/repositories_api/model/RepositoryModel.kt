@@ -1,6 +1,6 @@
-package app.google.domain.model
+package app.google.repositories_api.model
 
-data class RepositoriesModel(
+data class RepositoryModel(
     val id: String,
     val name: String,
     val description: String?,

@@ -1,7 +1,9 @@
 package app.google.domain.repository
 
-import app.google.domain.model.RepositoriesModel
+import app.google.domain.model.RepositoryModel
 
 interface Repository {
-    suspend fun getRepositories(): List<RepositoriesModel?>?
+    var repositoryModel: RepositoryModel?
+
+    suspend fun getRepositories(): List<RepositoryModel?>?
 }
