@@ -2,7 +2,9 @@ package app.google.network
 
 
 import app.google.UserRepositoryListQuery
+import app.google.ViewerInfoQuery
 import app.google.model.Repository
+import app.google.model.ViewerInfo
 import app.google.networkapi.RemoteDataSourceApi
 import com.apollographql.apollo3.ApolloClient
 
@@ -25,4 +27,10 @@ class RemoteDataSourceImp @Inject constructor(
             }
         }
     }
+
+    override suspend fun getViewerInfo(): ViewerInfo =
+        apolloClient.query(ViewerInfoQuery()).execute().data!!.viewer.let {
+            ViewerInfo(login = it.login, name = it.name, email = it.email)
+        }
+
 }

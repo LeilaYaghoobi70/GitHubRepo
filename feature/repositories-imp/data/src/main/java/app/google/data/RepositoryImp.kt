@@ -2,6 +2,7 @@ package app.google.data
 
 import app.google.data.mapper.toDomain
 import app.google.domain.model.RepositoryModel
+import app.google.domain.model.ViewerInfoModel
 import app.google.networkapi.RemoteDataSourceApi
 import javax.inject.Inject
 import app.google.domain.repository.Repository
@@ -15,5 +16,8 @@ class RepositoryImp @Inject constructor(
         remoteDataSourceApi.getRepositories()?.map {
             it?.toDomain()
         }
+
+    override suspend fun getViewerInfo(): ViewerInfoModel =
+       remoteDataSourceApi.getViewerInfo().toDomain()
 
 }

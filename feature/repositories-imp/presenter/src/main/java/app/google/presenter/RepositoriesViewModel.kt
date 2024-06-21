@@ -4,9 +4,12 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import app.google.domain.interactor.RepositoriesInteractor
 import app.google.domain.model.RepositoryModel
+import app.google.domain.model.ViewerInfoModel
 import app.google.presenter.contract.RepositoriesState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.async
+import kotlinx.coroutines.awaitAll
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.stateIn
@@ -42,11 +45,15 @@ class RepositoriesViewModel @Inject constructor(
             _uiState.update {
                 it.copy(loading = true)
             }
+            val repositories = async { repositoriesInteractor.getRepositories() }.await()
+            val viewerInfo = async { repositoriesInteractor.getViewerInfo() }.await()
+
             _uiState.update {
                 it.copy(
-                    repositories = repositoriesInteractor.getRepositories(),
+                    repositories = repositories,
                     loading = false,
                     showErrorMessage = false,
+                    viewerInfoModel = viewerInfo,
                 )
             }
         }
