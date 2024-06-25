@@ -1,0 +1,10 @@
+
+query GetRepositoryInfo($name: String!) {
+    repository  (name: $name, owner: "leilaYaghoobi70") @nonnull{
+        nameWithOwner @nonnull
+        updatedAt @nonnull
+        createdAt @nonnull
+        description
+        pushedAt
+    }
+}

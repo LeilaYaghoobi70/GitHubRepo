@@ -6,5 +6,6 @@ query ViewerInfoQuery {
         login  @nonnull
         name @nonnull
         email @nonnull
+        avatarUrl @nonnull
     }
 }

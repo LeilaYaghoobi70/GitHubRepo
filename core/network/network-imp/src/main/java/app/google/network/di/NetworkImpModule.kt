@@ -1,10 +1,12 @@
 package app.google.network.di
 
 import app.google.network.BuildConfig
-import app.google.network.RemoteDataSourceImp
+import app.google.network.RepositoriesRemoteDataSourceImp
+import app.google.network.RepositoryRemoteDataSourceImp
 import app.google.network.interceptor.AuthorizationInterceptor
 import app.google.network.interceptor.LoggingApolloInterceptor
-import app.google.networkapi.RemoteDataSourceApi
+import app.google.networkapi.RepositoriesRemoteDataSourceApi
+import app.google.networkapi.RepositoryRemoteDataSourceApi
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.interceptor.ApolloInterceptor
 import dagger.Module
@@ -23,7 +25,8 @@ class NetworkImpModule {
 
     @Named("authorizationInterceptor")
     @Provides
-    fun provideAuthorizationInterceptor(): ApolloInterceptor = AuthorizationInterceptor(BuildConfig.GITHUB_TOKEN)
+    fun provideAuthorizationInterceptor(): ApolloInterceptor =
+        AuthorizationInterceptor(BuildConfig.GITHUB_TOKEN)
 
     @Provides
     @Singleton
@@ -41,6 +44,12 @@ class NetworkImpModule {
 
     @Provides
     @Singleton
-    fun provideRemoteDataSource(remoteDataSourceApi: RemoteDataSourceImp): RemoteDataSourceApi = remoteDataSourceApi
+    fun provideRepositoriesRemoteDataSource(repositoriesRemoteDataSource: RepositoriesRemoteDataSourceImp): RepositoriesRemoteDataSourceApi =
+        repositoriesRemoteDataSource
+
+    @Provides
+    @Singleton
+    fun provideRepositoryRemoteDataSource(repositoryRemoteDataSource: RepositoryRemoteDataSourceImp): RepositoryRemoteDataSourceApi =
+        repositoryRemoteDataSource
 
 }

@@ -7,6 +7,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import app.google.presenter.view.RepositoriesScreen
+import app.google.presenter.view.RepositoryScreen
 
 @Composable
 fun Navigator(
@@ -22,6 +23,11 @@ fun Navigator(
             RepositoriesScreen(
                 repositoriesViewModel = hiltViewModel(),
                 navigateToDetail = actions.navigateToDetail,
+            )
+        }
+        composable(route = Destinations.REPOSITORY_DETAIL) {
+            RepositoryScreen(
+                repositoryInteractor = hiltViewModel(),
             )
         }
     }
